@@ -5,7 +5,7 @@ export const getList = createAsyncThunk(
    "GET_LIST",
    async () => {
     try {
-      const res = await axios.get("https://my-json-server.typicode.com/wonhjteacher/exserver");
+      const res = await axios.get("https://my-json-server.typicode.com/wonhjteacher/exserver/list");
       return res.data;
     } catch (err) {
       console.log(err)
@@ -15,7 +15,7 @@ export const getList = createAsyncThunk(
   "ADD_LIST", 
     async (newList) => {
     try {
-    const res = await axios.post("https://my-json-server.typicode.com/wonhjteacher/exserver", newList);
+    const res = await axios.post("https://my-json-server.typicode.com/wonhjteacher/exserver/list", newList);
     return res.data;
     }catch (err){
       console.log(err)
@@ -26,7 +26,7 @@ export const getList = createAsyncThunk(
     "DELETE_LIST", 
       async (id) => {
       try {
-      const res = await axios.delete(`https://my-json-server.typicode.com/wonhjteacher/exserver/${id}`);
+      const res = await axios.delete(`https://my-json-server.typicode.com/wonhjteacher/exserver/list/${id}`);
       return id;
       }catch (err){
         console.log(err)
@@ -37,7 +37,7 @@ export const getList = createAsyncThunk(
       "UPDATE_LIST",
         async ({ id, content }) => {
         try {
-        const res = await axios.put(`https://my-json-server.typicode.com/wonhjteacher/exserver/${id}`, {
+        const res = await axios.put(`https://my-json-server.typicode.com/wonhjteacher/exserver/list/${id}`, {
           content: content,
         })
         return {id,content}
@@ -46,7 +46,13 @@ export const getList = createAsyncThunk(
           console.log(err)
         }
       });
-
+/*   const getList = createAsyncThunk(
+      "GET_LIST",
+      const res= await fetch('https://my-json-server.typicode.com/wonhjteacher/exserver/list')
+      const data = await res.json();
+      return data.value;
+   });
+  */
 
  const listSlice = createSlice({
   name: 'list',
@@ -55,7 +61,9 @@ export const getList = createAsyncThunk(
     message:'default'
   },
   reducers: {
-
+  /*   getDataSuccess: (state, action) => {
+      state.value= action.payload; 
+    },*/
   },
   extraReducers: (builder) => { //extraReducers 외부/비동기 action을 넣는 공간으
     builder.addCase(getList.fulfilled, (state,action)=>{
